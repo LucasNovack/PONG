@@ -1,0 +1,70 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100vw;
+    background-color: grey;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gameArea{
+    background-color: black;
+    width: 50vw;
+    height: 60vh;
+}
+
+#ball{
+    position: relative;
+    width: 20px;
+    margin-left: 90px;
+    height: 20px;
+    background-color: ghostwhite;
+}
+
+#player1, #player2{
+    position: fixed;
+    background-color: ghostwhite;
+    width: 20px;
+    height: 80px;
+}
+
+#player1{
+    margin-top: 2%;
+}
+
+#player2{
+    margin-left: 48.96%;
+}
+
+#score1, #score2 {
+    margin-top: -20px;
+    font-size: 6rem;
+    color: ghostwhite;
+    position: fixed;
+    font-family: 'Nova Square', cursive;;
+}
+
+#score1{
+    margin-left: 11%;
+}
+
+#score2{
+    margin-left: calc(25% + 11%);
+}
+
+#halfCourt{
+    position: fixed;
+    margin-top: -20px;
+    margin-left: 25%;
+    width: 0;
+    height: 60vh;
+    border-left: 7px dashed ghostwhite;
+}
