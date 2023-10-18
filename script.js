@@ -1,10 +1,8 @@
-import { moveDown, moveUp } from './js/movement.js';
-import { keysState } from './js/keyState.js';
-
-const player1 = document.querySelector("#player1");
-const player2 = document.querySelector("#player2");
-const placar1 = document.querySelector('#score1')
-const placar2 = document.querySelector('#score2')
+import { moveDown, moveUp } from "./js/movement.js";
+import { player1, player2 } from "./js/players.js";
+import { keysState } from "./js/keyState.js";
+import { placar1, placar2 } from "./js/scores.js";
+import { restart } from "./js/restart.js";
 
 document.addEventListener("keydown", (event) => {
   handleKeyDown(event.key);
@@ -48,30 +46,43 @@ let bolaY = 200;
 let velocidadeX = 4;
 let velocidadeY = 4;
 
-
 function atualizarBola() {
-
   bolaX += velocidadeX;
   bolaY += velocidadeY;
 
-
-  if(bolaX >= 880){
-    marcarValor(1)
-    const player2Coord = player2.getBoundingClientRect()
-    debugger
-    const valorPosRestart = restart()
-    bolaX = valorPosRestart[0]
-    bolaY = valorPosRestart[1]
+  const player1Rect = player1.getBoundingClientRect();
+  const player2Rect = player2.getBoundingClientRect();
+  if (
+    bolaX >= 840 &&
+    bolaY <= player2Rect.bottom - 190 &&
+    bolaY >= player2Rect.top - 220
+  ) {
+    velocidadeX = -velocidadeX;
   }
 
-  if(bolaX <= -130){
-    marcarValor()
-    const valorPosRestart = restart()
-    bolaX = valorPosRestart[0]
-    bolaY = valorPosRestart[1]
+  if (
+    bolaX <= -80 &&
+    bolaY <= player1Rect.bottom - 190 &&
+    bolaY >= player1Rect.top - 220
+  ) {
+    velocidadeX = -velocidadeX;
   }
 
-  if (bolaY <= 0 ||  bolaY >= 580){
+  if (bolaX >= 865) {
+    marcarValor(1);
+    const valorPosRestart = restart();
+    bolaX = valorPosRestart[0];
+    bolaY = valorPosRestart[1];
+  }
+
+  if (bolaX <= -100) {
+    marcarValor();
+    const valorPosRestart = restart();
+    bolaX = valorPosRestart[0];
+    bolaY = valorPosRestart[1];
+  }
+
+  if (bolaY <= 0 || bolaY >= 535) {
     velocidadeY = -velocidadeY;
   }
 
@@ -80,20 +91,16 @@ function atualizarBola() {
 }
 
 function animarBola() {
-  setInterval(atualizarBola, 16);
+  setInterval(atualizarBola, 12);
 }
 
 animarBola();
 
-
-function marcarValor(player = 2){
-  if(player == 1){
-    placar1.innerHTML = +placar1.innerHTML + 1
-  } else{
-    placar2.innerHTML = +placar2.innerHTML + 1
+function marcarValor(player = 2) {
+  if (player == 1) {
+    placar1.innerHTML = +placar1.innerHTML + 1;
+  } else {
+    placar2.innerHTML = +placar2.innerHTML + 1;
   }
 }
 
-function restart(){
-  return [400, 250];
-}

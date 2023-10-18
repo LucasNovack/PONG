@@ -37,10 +37,11 @@ main{
 }
 
 #player1{
-    margin-top: 2%;
+    margin-top: -20px;
 }
 
 #player2{
+    margin-top: -20px;
     margin-left: 48.96%;
 }
 
